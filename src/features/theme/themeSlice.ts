@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
-import { ThemeObjType, defaultTheme } from "../../../constants";
+import { defaultTheme, pastelTheme, solarizedDark  } from "../../../constants";
+import type { ThemeObjType } from "../../../constants";
 
 interface ThemeState{
     value:ThemeObjType

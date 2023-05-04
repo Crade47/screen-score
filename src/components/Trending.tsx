@@ -48,7 +48,7 @@ export default function Trending({
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.headingContainer}>
-        <Feather name="trending-up" size={24} color={theme.darkest} />
+        <Feather name="trending-up" style={styles.trendingIcon} size={27} color={theme.darkest} />
         <Text style={[styles.headingText, {color:theme.lightest}]}>Trending</Text>
       </View>
       {/* List */}
@@ -103,6 +103,9 @@ const styles = StyleSheet.create({
     width: 250,
     borderRadius: 10,
     zIndex: 1,
+  },
+  trendingIcon:{
+    paddingTop:20
   },
   trendingElementOverlay: {
     height: 250,
