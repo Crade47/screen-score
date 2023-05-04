@@ -11,8 +11,12 @@ import { selectTheme } from "../features/theme/themeSlice";
 
 
 
-const TrendingComponent = ({ id, title, backdrop_path }: TrendingData) => {
-    const theme = useAppSelector(selectTheme)
+const TrendingComponent = ({ id, title, backdrop_path, vote_average }: TrendingData) => {
+  
+  const theme = useAppSelector(selectTheme)
+  const rating = Math.ceil(vote_average) / 2
+
+
   return (
     <View style={styles.trendingContainer}>
       <View style={{position:'relative'}}>
@@ -27,6 +31,7 @@ const TrendingComponent = ({ id, title, backdrop_path }: TrendingData) => {
         />
         <Text style={styles.trendingText}>{title}</Text>
         <FontAwesome name="star" size={17} color={theme.darkest} style={styles.ratingStar} />
+        <Text style={[styles.rating, {color: `${theme.lightest}`}]}>{rating}</Text>
       </View>
     </View>
   );
@@ -66,6 +71,9 @@ export default function Trending({
           )}
           estimatedItemSize={250}
           horizontal={true}
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
+          
         />
       </View>
     </SafeAreaView>
@@ -133,5 +141,13 @@ const styles = StyleSheet.create({
     bottom: 10,
     left:14,
     zIndex:6
-  }
+  },
+  rating:{
+    position:'absolute',
+    zIndex:6,
+    bottom: 9.25,
+    left:35,
+    fontFamily:'Monteserrat',
+    fontWeight:'bold'
+  },
 });

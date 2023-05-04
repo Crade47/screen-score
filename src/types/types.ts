@@ -17,7 +17,16 @@ export interface ITrendingProps{
     isTrendingLoading:boolean,
 };
 
-
+export interface IRatingStars{
+    vote_average:number,
+    size:number,
+    style:{
+        position: "absolute";
+        bottom: number;
+        left: number;
+        zIndex: number;
+    }
+}
 
 export interface IDropdownComponent{
     themeData:{label: string, value:ThemeObjType}[],
@@ -25,3 +34,4 @@ export interface IDropdownComponent{
     setCurrentSelection: React.Dispatch<React.SetStateAction<string>>,
     handleThemeChange: (themeObj: ThemeObjType) => void
 }
+

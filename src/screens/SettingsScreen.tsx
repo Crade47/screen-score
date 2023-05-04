@@ -9,7 +9,6 @@ export default function SettingsScreen() {
   const theme = useAppSelector(selectTheme);
   const dispatch = useAppDispatch();
   const [currentSelection, setCurrentSelection] = useState("Default");
-  const [currentThemeObject, setCurrentThemeObject] = useState(theme);
   const themeData = [
     { label: "Default", value: defaultTheme },
     { label: "Pastel", value: pastelTheme },
