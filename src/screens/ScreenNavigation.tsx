@@ -10,9 +10,10 @@ import { Entypo, Foundation, Ionicons, FontAwesome5 } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { useAppSelector } from '../app/hooks';
 import { selectTheme } from '../features/theme/themeSlice';
+import { RootStackParamList } from '../types/types';
 
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator<RootStackParamList>();
 
 export default function ScreenNavigation() {
   const theme = useAppSelector(selectTheme);
@@ -20,7 +21,7 @@ export default function ScreenNavigation() {
     <Tab.Navigator
     screenOptions={({ route }) => ({
       tabBarIcon: ({ focused, color, size }) => {
-        let iconName: string;
+        let iconName:any;
 
         if (route.name === 'Home') {
           iconName = focused
@@ -47,6 +48,7 @@ export default function ScreenNavigation() {
         borderTopLeftRadius:30,
       },
       tabBarShowLabel:false,
+      tabBarHideOnKeyboard:true
     })}
   > 
         <Tab.Screen name="Home" component={HomeScreen}/>

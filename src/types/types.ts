@@ -1,6 +1,16 @@
 import { ThemeObjType } from "../../constants"
+import type { BottomTabScreenProps } from "@react-navigation/bottom-tabs"
 
-export interface IHeaderProps{
+
+export type RootStackParamList = {
+    Home: undefined;
+    Search: undefined;
+    List:undefined;
+    Settings:undefined
+  };
+
+
+export interface ISearchProps{
     movieSearchString:string,
     setMovieSearchString: React.Dispatch<React.SetStateAction<string>>,
 };

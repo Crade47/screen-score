@@ -73,9 +73,10 @@ export default function Trending({
           horizontal={true}
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}
-          
+     
         />
       </View>
+      
     </SafeAreaView>
   );
 }

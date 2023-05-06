@@ -11,15 +11,21 @@ import {
 import mainLogo from "../../assets/logo-main.png";
 import { Image } from "expo-image";
 import { EvilIcons } from "@expo/vector-icons";
-import type { IHeaderProps } from "../types/types";
+import type { RootStackParamList } from "../types/types";
 import { useAppSelector } from "../app/hooks";
 import { selectTheme } from "../features/theme/themeSlice";
+import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 
-export default function Header({
-  movieSearchString,
-  setMovieSearchString,
-}: IHeaderProps) {
+type HeaderProps = {navigation:BottomTabScreenProps<RootStackParamList, 'Home'>['navigation']};
+export default function Header({ navigation }: HeaderProps) {
   const theme = useAppSelector(selectTheme);
+  const [isEditable, setisEditable] = useState(true);
+
+  const searchBarTouch = () => {
+    navigation.navigate("Search");
+    setisEditable((prevState) => !prevState);
+  };
+
   return (
     <>
       <SafeAreaView style={styles.container}>
@@ -30,11 +36,16 @@ export default function Header({
               cursorColor={theme.darkest}
               style={[
                 styles.searchBar,
-                { color: `${theme.lightest}`, borderColor: `${theme.lightest}`},
+                {
+                  color: `${theme.lightest}`,
+                  borderColor: `${theme.lightest}`,
+                },
               ]}
-              onChangeText={(newText) => setMovieSearchString(newText)}
+              // editable={false}
+              selectTextOnFocus={isEditable}
+              onTouchStart={searchBarTouch}
             />
-            <Pressable onPress={() => Alert.alert(movieSearchString)}>
+            <Pressable onPress={() => navigation.navigate("Search")}>
               <EvilIcons name="search" size={40} color={theme.lightest} />
             </Pressable>
           </View>
@@ -49,8 +60,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "flex-end",
     flexDirection: "row",
-    marginTop:40,
-    
+    marginTop: 40,
   },
   searchBar: {
     fontSize: 20,
