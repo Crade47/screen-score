@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, SafeAreaView, StyleSheet, View } from "react-native";
+import { Text, SafeAreaView, StyleSheet, View, TouchableOpacity } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { ITrendingProps, TrendingData } from "../types/types";
 import { Image } from "expo-image";
@@ -8,7 +8,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { FontAwesome } from '@expo/vector-icons';
 import { useAppSelector } from "../app/hooks";
 import { selectTheme } from "../features/theme/themeSlice";
-
+import * as Haptics from 'expo-haptics';
 
 
 const TrendingComponent = ({ id, title, backdrop_path, vote_average }: TrendingData) => {
@@ -61,13 +61,25 @@ export default function Trending({
         <FlashList
           data={trendingData}
           renderItem={({ item, index }) => (
-            <TrendingComponent
-              key={index}
-              id={item.id}
-              backdrop_path={item.backdrop_path}
-              title={item.title}
-              vote_average={item.vote_average}
-            />
+            <TouchableOpacity
+                key={index}
+                onLongPress={
+                  () =>{ 
+                    Haptics.impactAsync(
+                      Haptics.ImpactFeedbackStyle.Medium
+                    )
+                  }
+                }
+              >
+                <TrendingComponent
+                  key={index}
+                  id={item.id}
+                  backdrop_path={item.backdrop_path}
+                  title={item.title}
+                  vote_average={item.vote_average}
+                />
+              </TouchableOpacity>
+
           )}
           estimatedItemSize={250}
           horizontal={true}

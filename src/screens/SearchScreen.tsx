@@ -5,6 +5,8 @@ import {
   StyleSheet,
   Alert,
   SafeAreaView,
+  TouchableOpacity,
+  Pressable,
 } from "react-native";
 import React, { useRef, useEffect, useState, SetStateAction } from "react";
 import { useAppSelector } from "../app/hooks";
@@ -19,6 +21,8 @@ import { FlashList } from "@shopify/flash-list";
 import placeholder_image from "../../assets/placeholder_search.png"
 import { FontAwesome } from '@expo/vector-icons';
 
+import * as Haptics from 'expo-haptics';
+
 
 const SearchResultComponent =  ({
   title,
@@ -32,7 +36,7 @@ const SearchResultComponent =  ({
   const rating = Math.ceil(vote_average) / 2
   return (
     <View style={styles.resultsContainer}>
-      <Image source={poster_path ? `https://image.tmdb.org/t/p/w500${poster_path}` : placeholder_image} style={styles.resultImage} />
+      <Image source={poster_path ? `https://image.tmdb.org/t/p/w500${poster_path}` : placeholder_image} style={styles.resultImage} contentFit="contain" />
       <View style={styles.titleContainer}>
         <Text style={[styles.resultTitle, {color: theme.darkest}]} >{title} {`(${year})`}</Text>
         <Text style={[styles.originalTitle, {color: theme.lightest}]}>{original_title}</Text>
@@ -98,15 +102,27 @@ export default function SearchScreen() {
               item: MovieData;
               index: number;
             }) => (
-              <SearchResultComponent
-                id={item.id}
+              <TouchableOpacity
                 key={index}
-                title={item.title}
-                original_title={item.original_title}
-                poster_path={item.poster_path}
-                release_date={item.release_date}
-                vote_average={item.vote_average}
-              />
+                onLongPress={
+                  () =>{ 
+                    Haptics.impactAsync(
+                      Haptics.ImpactFeedbackStyle.Medium
+                    )
+                  }
+                }
+              >
+
+                <SearchResultComponent
+                  id={item.id}
+                  key={index}
+                  title={item.title}
+                  original_title={item.original_title}
+                  poster_path={item.poster_path}
+                  release_date={item.release_date}
+                  vote_average={item.vote_average}
+                />
+              </TouchableOpacity>
             )}
             estimatedItemSize={100}
           />
@@ -148,7 +164,6 @@ const styles = StyleSheet.create({
   resultImage:{
     width: 62.5,
     height: 125,
-    resizeMode: 'contain',
     
   },
   titleContainer:{
