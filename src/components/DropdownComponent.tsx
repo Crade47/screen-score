@@ -82,7 +82,6 @@ import { ThemeObjType } from '../../constants';
     inputSearchStyle: {
       height: 40,
       fontSize: 16,
-      marginTop:10,
       fontFamily:'Monteserrat',
       fontWeight:'bold',
       backgroundColor:'transparent',
@@ -90,6 +89,11 @@ import { ThemeObjType } from '../../constants';
     },
     listContainer:{
       borderWidth:0,
+      width:200,
+      marginLeft:2,
+      marginTop:-1.75,
+      borderTopLeftRadius:10,
+      borderTopRightRadius:10,
       borderBottomRightRadius:10,
       borderBottomLeftRadius:10,
     },
