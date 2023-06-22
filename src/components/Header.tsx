@@ -30,7 +30,7 @@ export default function Header({ navigation }: HeaderProps) {
     <>
       <SafeAreaView style={styles.container}>
         <View style={styles.headerContainer}>
-          <Image source={mainLogo} style={styles.logo} />
+          <Image source={mainLogo} style={styles.logo} contentFit="contain" />
           <View style={styles.searchContainer}>
             <TextInput
               cursorColor={theme.darkest}
@@ -95,6 +95,5 @@ const styles = StyleSheet.create({
     flex: 1,
     alignSelf: "flex-end",
     height: 50,
-    resizeMode: "contain",
   },
 });
